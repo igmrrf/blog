@@ -1,9 +1,7 @@
 import React from "react"
 import { Link, graphql } from "gatsby"
 import styled from "styled-components"
-
 import Layout from "../components/layout"
-import Image from "../components/image"
 import SEO from "../components/seo"
 
 const BlogLink = styled(Link)`
@@ -25,7 +23,8 @@ export default ({ data }) => (
         <div key={node.id}>
           <BlogLink to={node.fields.slug}>
             <span>
-              {node.frontmatter.title} - {node.frontmatter.date}
+              <BlogTitle> {node.frontmatter.title}</BlogTitle> -{" "}
+              {node.frontmatter.date}
             </span>
           </BlogLink>
           <p>{node.excerpt}</p>
@@ -37,7 +36,7 @@ export default ({ data }) => (
 
 export const query = graphql`
   query {
-    allMarkdownRemark(sort: { fields: [frontmatter__date], order: DESC }) {
+    allMarkdownRemark(sort: { fields: [frontmatter___date], order: DESC }) {
       totalCount
       edges {
         node {
